@@ -1,10 +1,32 @@
-# `_Generic` Compile Speed Benchmark
+static void handle_unsigned_char( unsigned char x ){}
+static void handle_signed_char( signed char x ){}
+static void handle_unsigned_short( unsigned short x ){}
+static void handle_short( short x ){}
+static void handle_unsigned_int( unsigned int x ){}
+static void handle_int( int x ){}
+static void handle_unsigned_long( unsigned long x ){}
+static void handle_long( long x ){}
+static void handle_unsigned_long_long( unsigned long long x ){}
+static void handle_long_long( long long x ){}
+static void handle_float( float x ){}
+static void handle_double( double x ){}
+static void handle_unsigned_char_ptr( unsigned char *x ){}
+static void handle_signed_char_ptr( signed char *x ){}
+static void handle_unsigned_short_ptr( unsigned short *x ){}
+static void handle_short_ptr( short *x ){}
+static void handle_unsigned_int_ptr( unsigned int *x ){}
+static void handle_int_ptr( int *x ){}
+static void handle_unsigned_long_ptr( unsigned long *x ){}
+static void handle_long_ptr( long *x ){}
+static void handle_unsigned_long_long_ptr( unsigned long long *x ){}
+static void handle_long_long_ptr( long long *x ){}
+static void handle_float_ptr( float *x ){}
+static void handle_double_ptr( double *x ){}
 
-This repository contains a small benchmark of the speed at which GCC, Clang, and MSVC handle `_Generic` expressions in C at various optimization settings.
+int main( void )
+{
+  int foo = 0;
 
-The test file uses the preprocessor to generate 1,000,000 `_Generic` expressions, each containing 24 branches:
-
-```c
   #define X                                              \
   (void)_Generic( foo,                                   \
     unsigned char: handle_unsigned_char,                 \
@@ -32,17 +54,12 @@ The test file uses the preprocessor to generate 1,000,000 `_Generic` expressions
     float *: handle_float_ptr,                           \
     double *: handle_double_ptr                          \
   )( foo );                                              \
-```
 
-Each compiler is run five times, and the fastest compilation time is printed to the terminal.
+  #define X10 X X X X X X X X X X
+  #define X100 X10 X10 X10 X10 X10 X10 X10 X10 X10 X10
+  #define X1000 X100 X100 X100 X100 X100 X100 X100 X100 X100 X100
+  #define X10000 X1000 X1000 X1000 X1000 X1000 X1000 X1000 X1000 X1000 X1000
+  #define X100000 X10000 X10000 X10000 X10000 X10000 X10000 X10000 X10000 X10000 X10000
 
-To run the benchmark on Windows, execute `./run_bench.ps1 gcc clang cl` from PowerShell.
-
-To run the benchmark on Linux, execute `bash run_bench.sh gcc clang`.
-
-Leave out a specific compiler by omitting the corresponding argument.
-
-Results on Windows with an AMD Ryzen 7 5800H using MSVC 19.43.34810 and GCC 14.2.0 and Clang 19.1.7 via [MinGW-w64](https://winlibs.com/):
-
-![Benchmark graph](results_windows_Ryzen_7_5800H_winlibs.svg)
-
+  X100000
+}

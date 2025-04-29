@@ -30,7 +30,7 @@ _Generic( foo,
   long long *: handle_long_long_ptr,
   float *: handle_float_ptr,
   double *: handle_double_ptr
-)( foo );
+)( foo )
 ```
 
 Each compiler is run five times, and the fastest compilation time is printed to the terminal.

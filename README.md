@@ -44,5 +44,5 @@ Leave out a specific compiler by omitting the corresponding argument.
 
 Results on Windows with an AMD Ryzen 7 5800H using MSVC 19.43.34810 and GCC 14.2.0 and Clang 19.1.7 via [MinGW-w64](https://winlibs.com/):
 
-![Benchmark graph](results_windows_Ryzen_7_5800H_winlibs.svg)
+<picture>![Benchmark graph](results_windows_Ryzen_7_5800H_winlibs.svg)</picture>
 
